@@ -60,8 +60,6 @@ Kontak
 -------
 Untuk pertanyaan seputar pengembangan, buka issue atau hubungi maintainer melalui channel yang tertera di repo.
 
----
-Jika Anda mau, saya bisa juga membuat `CONTRIBUTING.md` dan template PR/Issue otomatis.
 # Sistem Pemesanan Tiket Bioskop Online
 
 Final Project Pemrograman Web menggunakan PHP Native, MySQL, Bootstrap, HTML5, CSS, dan JavaScript/DOM.
