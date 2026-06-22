@@ -34,31 +34,6 @@ Struktur Ringkas
 - `includes/` — header, navbar, footer, dan partial lainnya
 - `admin/` — panel administrasi (login terpisah)
 
-Panduan Kontribusi Singkat
---------------------------
-Terima kasih sudah ingin berkontribusi — kontribusi kecil pun berharga (mis. perbaikan typo, dokumentasi, perbaikan bug kecil).
-
-Langkah cepat untuk kontribusi:
-1. Fork repo dan buat branch baru dengan pola `feature/<nama>` atau `fix/<issue>`.
-2. Pastikan perubahan tidak merusak fungsi utama. Jalankan manual testing pada XAMPP.
-3. Gunakan pesan commit yang jelas, contoh: `feat(auth): tambah validasi input register` atau `fix(readme): perbaiki penulisan`.
-4. Buat Pull Request yang menjelaskan perubahan, area yang diuji, dan langkah reproduski (jika bug).
-
-Tip untuk contributor baru
-- Buat issue kecil bertanda `good first issue` jika ingin mulai dari hal sederhana.
-- Untuk perubahan UI/CSS, lampirkan screenshot sebelum dan sesudah.
-
-Pelaporan Masalah
-------------------
-Buat issue baru dengan langkah reproduksi, hasil yang diharapkan, dan screenshot/log bila perlu.
-
-Lisensi
--------
-Proyek ini tidak memiliki lisensi tersurat di repo. Disarankan menambahkan file `LICENSE` (mis. MIT) agar kontribusi aman.
-
-Kontak
--------
-Untuk pertanyaan seputar pengembangan, buka issue atau hubungi maintainer melalui channel yang tertera di repo.
 
 # Sistem Pemesanan Tiket Bioskop Online
 
@@ -165,4 +140,3 @@ Proyek ini sudah memenuhi kebutuhan utama tugas:
 - MySQL.
 - CRUD.
 - Role admin dan user.
-- Struktur siap diunggah ke GitHub.
