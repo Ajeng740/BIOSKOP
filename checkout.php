@@ -7,14 +7,16 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 
 $user = current_user();
-$jadwalId = (int) ($_POST['jadwal_id'] ?? 0);
-$kursiIds = array_map('intval', $_POST['kursi'] ?? []);
-$kursiIds = array_values(array_unique(array_filter($kursiIds)));
+$errors = [];
 
-if ($jadwalId <= 0 || count($kursiIds) === 0) {
-    set_flash('danger', 'Pilih minimal satu kursi.');
+if (!validate_booking_data($_POST, $errors)) {
+    $jadwalId = (int) ($_POST['jadwal_id'] ?? 0);
+    set_flash('danger', implode(' ', $errors));
     redirect('pilih_kursi.php?jadwal_id=' . $jadwalId);
 }
+
+$jadwalId = (int) sanitize_input($_POST['jadwal_id']);
+$kursiIds = normalize_seat_ids($_POST['kursi'] ?? []);
 
 $jadwalStmt = mysqli_prepare($koneksi, "SELECT * FROM jadwal_tayang WHERE id = ?");
 mysqli_stmt_bind_param($jadwalStmt, 'i', $jadwalId);

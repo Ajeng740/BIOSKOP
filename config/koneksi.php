@@ -1,7 +1,7 @@
 <?php
 // Konfigurasi database.
 // Jika folder project tidak bernama bioskop-online, ubah BASE_URL sesuai nama folder di htdocs.
-define('BASE_URL', '/daftarbioskop/');
+define('BASE_URL', '/BIOSKOP/');
 
 $host = 'localhost';
 $user = 'root';

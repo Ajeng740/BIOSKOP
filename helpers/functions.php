@@ -71,3 +71,36 @@ function generate_booking_code(): string
 {
     return 'BK-' . date('Ymd') . '-' . strtoupper(substr(bin2hex(random_bytes(4)), 0, 8));
 }
+
+function sanitize_input(string $value): string
+{
+    return htmlspecialchars(trim($value), ENT_QUOTES, 'UTF-8');
+}
+
+function normalize_seat_ids(array $seatIds): array
+{
+    $seatIds = array_map('intval', $seatIds);
+    $seatIds = array_filter($seatIds, fn($id) => $id > 0);
+    return array_values(array_unique($seatIds));
+}
+
+function validate_booking_data(array $data, array &$errors): bool
+{
+    $jadwalId = isset($data['jadwal_id']) ? (int) $data['jadwal_id'] : 0;
+    $kursi = $data['kursi'] ?? [];
+
+    if ($jadwalId <= 0) {
+        $errors['jadwal_id'] = 'Jadwal tidak valid.';
+    }
+
+    if (empty($kursi) || !is_array($kursi)) {
+        $errors['kursi'] = 'Pilih minimal satu kursi.';
+    } else {
+        $kursi = normalize_seat_ids($kursi);
+        if (count($kursi) === 0) {
+            $errors['kursi'] = 'Pilih minimal satu kursi yang valid.';
+        }
+    }
+
+    return empty($errors);
+}
