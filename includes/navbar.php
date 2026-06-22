@@ -19,6 +19,7 @@
             <div class="d-flex gap-2 align-items-center">
                 <?php if ($userLogin): ?>
                     <span class="text-light small d-none d-lg-inline">Halo, <?= e($userLogin['nama']) ?></span>
+                    <a class="btn btn-outline-light btn-sm" href="<?= url('profile.php') ?>">Profil</a>
                     <a class="btn btn-outline-light btn-sm" href="<?= url('logout.php') ?>">Logout</a>
                 <?php else: ?>
                     <a class="btn btn-outline-light btn-sm" href="<?= url('login.php') ?>">Login</a>
