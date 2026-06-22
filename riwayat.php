@@ -60,7 +60,11 @@ $orders = mysqli_stmt_get_result($stmt);
                                 <td><span class="badge text-bg-<?= badge_status($order['status']) ?>"><?= e($order['status']) ?></span></td>
                                 <td>
                                     <?php if ($order['status'] === 'Pending'): ?>
-                                        <a href="<?= url('batalkan_pesanan.php?id=' . $order['id']) ?>" class="btn btn-sm btn-outline-danger" data-confirm="Batalkan pemesanan ini?">Batalkan</a>
+                                        <form action="<?= url('batalkan_pesanan.php') ?>" method="post" class="d-inline">
+                                            <?= csrf_input() ?>
+                                            <input type="hidden" name="id" value="<?= e($order['id']) ?>">
+                                            <button type="submit" class="btn btn-sm btn-outline-danger" data-confirm="Batalkan pemesanan ini?">Batalkan</button>
+                                        </form>
                                     <?php else: ?>
                                         <span class="text-muted small">Tidak ada aksi</span>
                                     <?php endif; ?>

@@ -64,6 +64,7 @@ if (in_array($statusFilter, ['Pending', 'Dibayar', 'Dibatalkan'], true)) {
                                 <td><span class="badge text-bg-<?= badge_status($order['status']) ?>"><?= e($order['status']) ?></span></td>
                                 <td>
                                     <form action="<?= url('admin/pemesanan/update_status.php') ?>" method="post" class="d-flex gap-2 mb-2">
+                                        <?= csrf_input() ?>
                                         <input type="hidden" name="id" value="<?= e($order['id']) ?>">
                                         <select name="status" class="form-select form-select-sm" aria-label="Ubah status">
                                             <option value="Pending" <?= $order['status'] === 'Pending' ? 'selected' : '' ?>>Pending</option>
@@ -72,7 +73,11 @@ if (in_array($statusFilter, ['Pending', 'Dibayar', 'Dibatalkan'], true)) {
                                         </select>
                                         <button type="submit" class="btn btn-sm btn-primary">Update</button>
                                     </form>
-                                    <a href="<?= url('admin/pemesanan/hapus.php?id=' . $order['id']) ?>" class="btn btn-sm btn-outline-danger" data-confirm="Hapus pemesanan ini?">Hapus</a>
+                                    <form action="<?= url('admin/pemesanan/hapus.php') ?>" method="post" class="d-inline">
+                                        <?= csrf_input() ?>
+                                        <input type="hidden" name="id" value="<?= e($order['id']) ?>">
+                                        <button type="submit" class="btn btn-sm btn-outline-danger" data-confirm="Hapus pemesanan ini?">Hapus</button>
+                                    </form>
                                 </td>
                             </tr>
                         <?php endwhile; ?>

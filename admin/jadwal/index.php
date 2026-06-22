@@ -36,8 +36,12 @@ $jadwalList = mysqli_query($koneksi, "
                             <td>
                                 <div class="btn-group btn-group-sm">
                                     <a href="<?= url('admin/jadwal/edit.php?id=' . $jadwal['id']) ?>" class="btn btn-outline-primary">Edit</a>
-                                    <a href="<?= url('admin/jadwal/hapus.php?id=' . $jadwal['id']) ?>" class="btn btn-outline-danger" data-confirm="Hapus jadwal ini? Data pemesanan terkait juga dapat terhapus.">Hapus</a>
                                 </div>
+                                <form action="<?= url('admin/jadwal/hapus.php') ?>" method="post" class="d-inline">
+                                    <?= csrf_input() ?>
+                                    <input type="hidden" name="id" value="<?= e($jadwal['id']) ?>">
+                                    <button type="submit" class="btn btn-outline-danger btn-sm" data-confirm="Hapus jadwal ini? Data pemesanan terkait juga dapat terhapus.">Hapus</button>
+                                </form>
                             </td>
                         </tr>
                     <?php endwhile; ?>

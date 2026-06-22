@@ -10,6 +10,11 @@ if (is_logged_in()) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (!validate_csrf_token($_POST['csrf_token'] ?? null)) {
+        set_flash('danger', 'Token keamanan tidak valid. Silakan muat ulang halaman.');
+        redirect('login.php');
+    }
+
     $email = trim($_POST['email'] ?? '');
     $password = $_POST['password'] ?? '';
 
@@ -50,6 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <h1 class="h3 fw-bold mb-1">Login</h1>
                     <p class="text-muted mb-4">Masuk sebagai user atau admin.</p>
                     <form method="post">
+                        <?= csrf_input() ?>
                         <div class="mb-3">
                             <label for="email" class="form-label">Email</label>
                             <input type="email" class="form-control" id="email" name="email" required autocomplete="email">

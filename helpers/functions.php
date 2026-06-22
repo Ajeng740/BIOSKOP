@@ -77,6 +77,25 @@ function sanitize_input(string $value): string
     return htmlspecialchars(trim($value), ENT_QUOTES, 'UTF-8');
 }
 
+function generate_csrf_token(): string
+{
+    if (!isset($_SESSION['csrf_token'])) {
+        $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+    }
+
+    return $_SESSION['csrf_token'];
+}
+
+function validate_csrf_token(?string $token): bool
+{
+    return isset($_SESSION['csrf_token']) && !empty($token) && hash_equals($_SESSION['csrf_token'], $token);
+}
+
+function csrf_input(): string
+{
+    return '<input type="hidden" name="csrf_token" value="' . e(generate_csrf_token()) . '">';
+}
+
 function normalize_seat_ids(array $seatIds): array
 {
     $seatIds = array_map('intval', $seatIds);

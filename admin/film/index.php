@@ -30,9 +30,13 @@ $films = mysqli_query($koneksi, "SELECT * FROM films ORDER BY created_at DESC");
                             <td><?= e($film['durasi']) ?> menit</td>
                             <td><span class="badge text-bg-<?= $film['status'] === 'Tayang' ? 'success' : 'secondary' ?>"><?= e($film['status']) ?></span></td>
                             <td>
+                                <form action="<?= url('admin/film/hapus.php') ?>" method="post" class="d-inline">
+                                    <?= csrf_input() ?>
+                                    <input type="hidden" name="id" value="<?= e($film['id']) ?>">
+                                    <button type="submit" class="btn btn-outline-danger btn-sm" data-confirm="Hapus film ini? Data jadwal terkait juga dapat terhapus.">Hapus</button>
+                                </form>
                                 <div class="btn-group btn-group-sm">
                                     <a href="<?= url('admin/film/edit.php?id=' . $film['id']) ?>" class="btn btn-outline-primary">Edit</a>
-                                    <a href="<?= url('admin/film/hapus.php?id=' . $film['id']) ?>" class="btn btn-outline-danger" data-confirm="Hapus film ini? Data jadwal terkait juga dapat terhapus.">Hapus</a>
                                 </div>
                             </td>
                         </tr>

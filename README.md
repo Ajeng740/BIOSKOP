@@ -1,3 +1,67 @@
+BIOSKOP — Aplikasi Pemesanan Tiket Film (PHP)
+=============================================
+
+Ringkasan
+---------
+BIOSKOP adalah aplikasi web sederhana untuk pemesanan tiket film yang dibangun dengan PHP dan MySQL. Aplikasi ini sudah mencakup halaman publik, proses registrasi/login, pemilihan kursi, pemesanan, dan panel admin untuk mengelola film, jadwal, studio, dan pemesanan.
+
+Fitur Utama
+-----------
+- Registrasi dan autentikasi pengguna (`register.php`, `login.php`, `logout.php`)
+- Melihat daftar film dan detail (`film.php`, `detail_film.php`)
+- Pemilihan kursi dan proses checkout (`pilih_kursi.php`, `checkout.php`)
+- Riwayat pesanan dan pembatalan (`riwayat.php`, `batalkan_pesanan.php`)
+- Panel admin untuk mengelola film, jadwal, studio, dan pemesanan (folder `admin/`)
+
+Prasyarat
+---------
+- PHP 7.4+ atau setara
+- MySQL / MariaDB
+- Web server (Apache/Nginx) — disarankan gunakan XAMPP untuk pengembangan lokal di Windows
+
+Instalasi & Jalankan (lokal)
+---------------------------
+1. Salin repo ke folder web server lokal Anda (mis. `c:\xampp\htdocs\BIOSKOP`).
+2. Buat database MySQL dan impor struktur/seed (file SQL tidak disertakan — lihat `config/koneksi.php` untuk pengaturan koneksi).
+3. Sesuaikan koneksi database di `config/koneksi.php`.
+4. Pastikan folder `assets/` dapat diakses oleh server dan `helpers/` tersedia.
+5. Buka `http://localhost/BIOSKOP/` di browser.
+
+Struktur Ringkas
+----------------
+- `config/` — konfigurasi koneksi database
+- `helpers/` — fungsi helper dan autentikasi
+- `includes/` — header, navbar, footer, dan partial lainnya
+- `admin/` — panel administrasi (login terpisah)
+
+Panduan Kontribusi Singkat
+--------------------------
+Terima kasih sudah ingin berkontribusi — kontribusi kecil pun berharga (mis. perbaikan typo, dokumentasi, perbaikan bug kecil).
+
+Langkah cepat untuk kontribusi:
+1. Fork repo dan buat branch baru dengan pola `feature/<nama>` atau `fix/<issue>`.
+2. Pastikan perubahan tidak merusak fungsi utama. Jalankan manual testing pada XAMPP.
+3. Gunakan pesan commit yang jelas, contoh: `feat(auth): tambah validasi input register` atau `fix(readme): perbaiki penulisan`.
+4. Buat Pull Request yang menjelaskan perubahan, area yang diuji, dan langkah reproduski (jika bug).
+
+Tip untuk contributor baru
+- Buat issue kecil bertanda `good first issue` jika ingin mulai dari hal sederhana.
+- Untuk perubahan UI/CSS, lampirkan screenshot sebelum dan sesudah.
+
+Pelaporan Masalah
+------------------
+Buat issue baru dengan langkah reproduksi, hasil yang diharapkan, dan screenshot/log bila perlu.
+
+Lisensi
+-------
+Proyek ini tidak memiliki lisensi tersurat di repo. Disarankan menambahkan file `LICENSE` (mis. MIT) agar kontribusi aman.
+
+Kontak
+-------
+Untuk pertanyaan seputar pengembangan, buka issue atau hubungi maintainer melalui channel yang tertera di repo.
+
+---
+Jika Anda mau, saya bisa juga membuat `CONTRIBUTING.md` dan template PR/Issue otomatis.
 # Sistem Pemesanan Tiket Bioskop Online
 
 Final Project Pemrograman Web menggunakan PHP Native, MySQL, Bootstrap, HTML5, CSS, dan JavaScript/DOM.

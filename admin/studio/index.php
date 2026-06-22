@@ -27,8 +27,12 @@ $studios = mysqli_query($koneksi, "SELECT * FROM studios ORDER BY nama_studio AS
                             <td>
                                 <div class="btn-group btn-group-sm">
                                     <a href="<?= url('admin/studio/edit.php?id=' . $studio['id']) ?>" class="btn btn-outline-primary">Edit</a>
-                                    <a href="<?= url('admin/studio/hapus.php?id=' . $studio['id']) ?>" class="btn btn-outline-danger" data-confirm="Hapus studio ini? Data kursi dan jadwal terkait juga dapat terhapus.">Hapus</a>
                                 </div>
+                                <form action="<?= url('admin/studio/hapus.php') ?>" method="post" class="d-inline">
+                                    <?= csrf_input() ?>
+                                    <input type="hidden" name="id" value="<?= e($studio['id']) ?>">
+                                    <button type="submit" class="btn btn-outline-danger btn-sm" data-confirm="Hapus studio ini? Data kursi dan jadwal terkait juga dapat terhapus.">Hapus</button>
+                                </form>
                             </td>
                         </tr>
                     <?php endwhile; ?>

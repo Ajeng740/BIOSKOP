@@ -6,6 +6,11 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     redirect('film.php');
 }
 
+if (!validate_csrf_token($_POST['csrf_token'] ?? null)) {
+    set_flash('danger', 'Token keamanan tidak valid. Silakan ulangi pemesanan.');
+    redirect('film.php');
+}
+
 $user = current_user();
 $errors = [];
 

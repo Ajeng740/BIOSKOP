@@ -7,6 +7,11 @@ $user = current_user();
 $errors = [];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (!validate_csrf_token($_POST['csrf_token'] ?? null)) {
+        set_flash('danger', 'Token keamanan tidak valid. Silakan muat ulang halaman.');
+        redirect('profile.php');
+    }
+
     $nama = trim($_POST['nama'] ?? '');
     $email = trim($_POST['email'] ?? '');
 
@@ -57,6 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <h1 class="h3 fw-bold mb-1">Profil Saya</h1>
                     <p class="text-muted mb-4">Kelola informasi akun kamu di sini.</p>
                     <form method="post">
+                        <?= csrf_input() ?>
                         <div class="mb-3">
                             <label for="nama" class="form-label">Nama Lengkap</label>
                             <input type="text" class="form-control" id="nama" name="nama" value="<?= e($user['nama']) ?>" required>

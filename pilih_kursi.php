@@ -57,6 +57,7 @@ while ($row = mysqli_fetch_assoc($bookedResult)) {
                         <div class="screen-line"></div>
 
                         <form action="<?= url('checkout.php') ?>" method="post">
+                            <?= csrf_input() ?>
                             <input type="hidden" name="jadwal_id" value="<?= e($jadwalId) ?>">
                             <div class="seat-grid mb-4">
                                 <?php while ($kursi = mysqli_fetch_assoc($kursiResult)): ?>

@@ -5,6 +5,11 @@ require_admin();
 $id = (int) ($_POST['id'] ?? 0);
 $status = $_POST['status'] ?? 'Pending';
 
+if (!validate_csrf_token($_POST['csrf_token'] ?? null)) {
+    set_flash('danger', 'Token keamanan tidak valid.');
+    redirect('admin/pemesanan/index.php');
+}
+
 if (!in_array($status, ['Pending', 'Dibayar', 'Dibatalkan'], true)) {
     set_flash('danger', 'Status tidak valid.');
     redirect('admin/pemesanan/index.php');

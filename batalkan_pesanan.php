@@ -2,8 +2,17 @@
 require_once __DIR__ . '/helpers/auth.php';
 require_login();
 
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    redirect('riwayat.php');
+}
+
+if (!validate_csrf_token($_POST['csrf_token'] ?? null)) {
+    set_flash('danger', 'Token keamanan tidak valid.');
+    redirect('riwayat.php');
+}
+
 $user = current_user();
-$id = (int) ($_GET['id'] ?? 0);
+$id = (int) ($_POST['id'] ?? 0);
 $status = 'Dibatalkan';
 
 $stmt = mysqli_prepare($koneksi, "UPDATE pemesanan SET status = ? WHERE id = ? AND user_id = ? AND status = 'Pending'");
