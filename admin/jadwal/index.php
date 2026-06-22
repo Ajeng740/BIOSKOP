@@ -1,0 +1,52 @@
+<?php
+require_once __DIR__ . '/../../helpers/auth.php';
+require_admin();
+$pageTitle = 'Kelola Jadwal';
+$jadwalList = mysqli_query($koneksi, "
+    SELECT jt.*, f.judul, s.nama_studio
+    FROM jadwal_tayang jt
+    JOIN films f ON f.id = jt.film_id
+    JOIN studios s ON s.id = jt.studio_id
+    ORDER BY jt.tanggal DESC, jt.jam DESC
+");
+?>
+<?php include __DIR__ . '/../../includes/header.php'; ?>
+<?php include __DIR__ . '/../../includes/admin_navbar.php'; ?>
+
+<main class="container-fluid px-lg-4 py-4">
+    <?php include __DIR__ . '/../../includes/flash.php'; ?>
+    <div class="d-flex flex-column flex-md-row justify-content-between gap-3 mb-4">
+        <div><h1 class="fw-bold mb-1">Kelola Jadwal Tayang</h1><p class="text-muted mb-0">CRUD jadwal tayang film.</p></div>
+        <a href="<?= url('admin/jadwal/tambah.php') ?>" class="btn btn-warning align-self-md-start">Tambah Jadwal</a>
+    </div>
+
+    <div class="card admin-card">
+        <div class="table-responsive">
+            <table class="table align-middle mb-0">
+                <thead class="table-dark"><tr><th>No</th><th>Film</th><th>Studio</th><th>Tanggal</th><th>Jam</th><th>Harga</th><th>Aksi</th></tr></thead>
+                <tbody>
+                    <?php $no = 1; while ($jadwal = mysqli_fetch_assoc($jadwalList)): ?>
+                        <tr>
+                            <td><?= $no++ ?></td>
+                            <td class="fw-semibold"><?= e($jadwal['judul']) ?></td>
+                            <td><?= e($jadwal['nama_studio']) ?></td>
+                            <td><?= tanggal_indonesia($jadwal['tanggal']) ?></td>
+                            <td><?= e(substr($jadwal['jam'], 0, 5)) ?> WIB</td>
+                            <td><?= rupiah($jadwal['harga']) ?></td>
+                            <td>
+                                <div class="btn-group btn-group-sm">
+                                    <a href="<?= url('admin/jadwal/edit.php?id=' . $jadwal['id']) ?>" class="btn btn-outline-primary">Edit</a>
+                                    <a href="<?= url('admin/jadwal/hapus.php?id=' . $jadwal['id']) ?>" class="btn btn-outline-danger" data-confirm="Hapus jadwal ini? Data pemesanan terkait juga dapat terhapus.">Hapus</a>
+                                </div>
+                            </td>
+                        </tr>
+                    <?php endwhile; ?>
+                    <?php if (mysqli_num_rows($jadwalList) === 0): ?>
+                        <tr><td colspan="7" class="text-center text-muted py-4">Belum ada jadwal tayang.</td></tr>
+                    <?php endif; ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</main>
+<?php include __DIR__ . '/../../includes/footer.php'; ?>
